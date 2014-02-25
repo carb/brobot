@@ -1,4 +1,4 @@
-// For todays date;
+// For todays date
 Date.prototype.today = function () {
   return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
 }
@@ -8,6 +8,7 @@ Date.prototype.timeNow = function () {
   return ((this.getUTCHours() < 10)?"0":"") + this.getUTCHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
 
+// When this bot was run for the first time locally
 var birthday = localStorage.getItem("birthday");
 if (birthday == null) {
   birthday = new Date().today();
@@ -33,7 +34,6 @@ function chatCallback(data) {
         console.log("Null Song Data");
       } else {
         if (songData["timesPlayed"] === 1) {
-          //API.sendChat("/me This song has been played " + songData["timesPlayed"] + " time since " + birthday);
           API.sendChat("/me " + songData["lastPlayed"]);
         } else if (songData["timesPlayed"] == undefined) {
           API.sendChat("/me This song has been played 0 times since " + birthday);
@@ -61,6 +61,9 @@ function chatCallback(data) {
       API.sendChat("/me " + inappropriateJokesQ[choice]);
       setTimeout(function () {API.sendChat("/me " + inappropriateJokesA[choice])}, 5000);
     } else if (data.message.substring(0,10) === "&amp;songinfo ") {
+      //TODO
+    } else if (data.message.substring(0,10) === "&amp;userinfo ") {
+      //TODO
     } else if (data.message === "&amp;roomrules") {
       API.sendChat("/me Please note: this room is for deeper, darker & more conscious sounds; Brostep, BroTrap, Moombahton, Trance, Electro House & other stressful music will get skipped without warning. Enjoy your stay!");
     } else if (data.message === "&amp;commands") {
