@@ -1,11 +1,11 @@
 // For todays date
 Date.prototype.today = function () {
-  return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
+  return (String("0"+this.getDate()).slice(-2)+"/"+String("0"+(this.getMonth()+1)).slice(-2)+"/"+this.getFullYear());
 }
 
 // For the time now
 Date.prototype.timeNow = function () {
-  return ((this.getUTCHours() < 10)?"0":"") + this.getUTCHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+  return (String("0"+this.getUTCHours()).slice(-2)+":"+String("0"+this.getMinutes()).slice(-2)+":"+String("0"+this.getSeconds()).slice(-2));
 }
 
 // When this bot was run for the first time locally
