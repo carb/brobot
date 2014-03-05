@@ -39,7 +39,11 @@ function chatCallback(data) {
           API.sendChat("/me This song has been played 0 times since " + birthday);
         } else {
           API.sendChat("/me This song has been played " + songData["timesPlayed"] + " times since " + birthday);
-          API.sendChat("/me " + songData["lastPlayed"]);
+          if (songData["lastPlayed"].indexOf("first") == -1) {
+            //TODO: Remove this. This is only a fix because many songs in the
+            //previous versions have incorrect "lastPlayed" data.
+            API.sendChat("/me " + songData["lastPlayed"]);
+          }
         }
       }
     } else if (data.message === "&amp;firstplayed") {
@@ -80,9 +84,9 @@ function newSongCallback(obj) {
     var prevSongData = JSON.parse(localStorage.getItem("" + previousSongObj.media.author + "-" + previousSongObj.media.title));
     prevSongData["lastPlayed"]  = "This song was last played on " + new Date().today() + " @ " + new Date().timeNow() + " GMT";
     localStorage.setItem("" + previousSongObj.media.author + "-" + previousSongObj.media.title, JSON.stringify(prevSongData));
-    previousSongObj = obj;
   }
   if (obj == null) return; //no DJ
+  previousSongObj = obj;
   var songData = JSON.parse(localStorage.getItem("" + obj.media.author + "-" + obj.media.title));
   if (songData == null) {
     songData = {};
